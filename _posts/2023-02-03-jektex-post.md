@@ -2,7 +2,7 @@
 layout: post
 ---
 
-This post is here to test [$$\jektex$$](https://github.com/yagarea/jektex),
+This post is here to test [jektex](https://github.com/yagarea/jektex),
 a lightweight jekyll plugin for LaTeX rendering $\LaTeX$.
 
 ## Inline example
