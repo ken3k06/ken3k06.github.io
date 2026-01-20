@@ -45,5 +45,5 @@ entries:
     entries:
       - title: There are still many things to improve here; one of them is code syntax highlighting. The rouge highlighter sometimes fails to highlight code blocks properly
       - title: will update more post on cryptanalysis and security T.T 
-      - title: <del> i use arch btw </del>
+      - title: ~~i use arch btw~~
 
