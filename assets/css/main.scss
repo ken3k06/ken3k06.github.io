@@ -2,3 +2,21 @@
 ---
 
 @import "no-style-please";
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("{{ '/assets/css/fonts/SourceCodePro-VariableFont_wght.ttf' | relative_url }}") format("truetype");
+  font-display: swap;
+}
+pre, code, kbd, samp {
+  font-family: "Source Code Pro",
+               ui-monospace, SFMono-Regular, Menlo, Monaco,
+               Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Rouge blocks */
+div.highlighter-rouge pre,
+figure.highlight pre,
+div.highlight pre {
+  font-size: 0.95em;
+  line-height: 1.5;
+}

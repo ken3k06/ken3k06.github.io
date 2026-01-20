@@ -17,24 +17,33 @@ entries:
       show_more_text: See archive...
       show_more_url: archive.html
 
-  - title: posts by category
+  - title: misc
     post_list:
       limit: 1 
-      category: example
+      category: misc
       show_more: true
       show_more_text: See more posts...
-      show_more_url: example-archive.html
+      show_more_url: misc-archive.html
 
-  - title: rss
-    url: feed.xml
+
   
-  - title: another list
+  - title: cryptography 
+    post_list:
+      limit: 5
+      category: crypto 
+      show_more: true
+      show_more_text: See more posts...
+      show_more_url: crypto-archive.html
+  # - title: another list
+  #   entries:
+  #     - title: with subitems
+  #       entries:
+  #         - title: with subsubitems
+  #         - title: example page
+  #           url: about
+  - title: about this site
     entries:
-      - title: with subitems
-        entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
-  - title: PRO TIP
-    entries:
-      - title: to edit this menu, edit _data/menu.yml file
+      - title: There are still many things to improve here; one of them is code syntax highlighting. The rouge highlighter sometimes fails to highlight code blocks properly
+      - title: will update more post on cryptanalysis and security T.T 
+      - title: <del> i use arch btw </del>
+
