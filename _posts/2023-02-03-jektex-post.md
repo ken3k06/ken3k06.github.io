@@ -13,9 +13,9 @@ adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua.
 
-$$
-\left[ \frac{-\hbar^2}{2\mu}\nabla^2 + V(\mathbf{r},t)\right] \Psi(\mathbf{r},t)
-$$
+$$\begin{equation*}
+x^{2} +y^{2} =z^{2}
+\end{equation*}$$
 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
 ea commodo consequat.
