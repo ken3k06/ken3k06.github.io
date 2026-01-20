@@ -56,3 +56,4 @@ For a vector $v$ in $V$, if there exist a finite number of vectors $w_1,w_2,...,
 The set consisting of all linear combinations of the vectors in $W$ is called the span of $W$ and is denoted by $span(W)$. 
 
 By default, we have $span(\emptyset) = \lbrace 0 \rbrace$.
+
