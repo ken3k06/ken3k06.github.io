@@ -43,7 +43,7 @@ entries:
   #           url: about
   - title: about this site
     entries:
-      - title: There are still many things to improve here; one of them is code syntax highlighting. The rouge highlighter sometimes fails to highlight code blocks properly
+      - title: There are still many things to improve here; one of them is code syntax highlighting. Currently the syntax is only black and white (LOL). 
       - title: will update more post on cryptanalysis and security T.T 
       - title: ~~i use arch btw~~
 
