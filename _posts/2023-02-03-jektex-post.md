@@ -22,11 +22,14 @@ Inline math is okay $a$, $b$ but display math is not okay, i still don't know wh
 
 <center>$x_3= \left(\frac{y_1 - y_2}{x_1 - x_2}\right)^2 - x_1 - x_2$</center>
 
-<center>$\displaystyle x^{2} +y^{2} =\left(\frac{1}{z^{2}}\right)$</center>
-
-```python 
+```python
 from sage.all import *
+print('hello world')
+a = pow(a,b,c) 
 ```
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
 ea commodo consequat.
 
+Viết thử tiếng việt 
+
+ok đó. 

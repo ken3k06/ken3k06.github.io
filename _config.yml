@@ -4,7 +4,7 @@ email: letriduc.dn@gmail.com # email of site's author
 url: https://ken3k06.github.io/ # root address of the site
 baseurl: "" # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
 description: > # description of the site (multiple lines allowed)
-  A (nearly) no-CSS, fast, minimalist Jekyll theme.
+  Chilling 
 
 permalink: /:slug.html
 
@@ -28,6 +28,10 @@ plugins:
   - jekyll-seo-tag
 
 
-# markdown: kramdown
-# highlighter: rouge
-#     input: GFM
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    line_numbers: true  
+ 

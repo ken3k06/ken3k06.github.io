@@ -4,7 +4,7 @@
 entries:
   - title: info
     entries:
-      - title: second-year at UIT-VNUHCM majoring in information security.
+      - title: second-year at UIT-VNUHCM, majoring in information security.
       - title: github repo
         url: https://github.com/ken3k06
       - title: "my fav playlist"
@@ -19,10 +19,11 @@ entries:
 
   - title: posts by category
     post_list:
-      category: example2
+      limit: 1 
+      category: example
       show_more: true
       show_more_text: See more posts...
-      show_more_url: example2-archive.html
+      show_more_url: example-archive.html
 
   - title: rss
     url: feed.xml
