@@ -92,6 +92,10 @@ e2dd2dbe6277: Download complete
 Digest: sha256:c881927c4077710ac4b1da63b83aa163937fb47457950c267d92f7e4dedf4aec
 Status: Downloaded newer image for nginx:latest
 ```
+
+Docker sẽ tự pull về nếu không có image hoặc ta có thể tự pull bằng `docker pull <image-name>`
+
+
 Kiểm tra các images trên máy:
 ```
 ❯ sudo docker images
@@ -114,8 +118,11 @@ cd8f51e8d35a   nginx     "/docker-entrypoint.…"   14 minutes ago   Up 14 minut
 sudo docker stop [docker-name]
 sudo docker run -d --name web -p 8080:80 nginx
 ```
+Ở đây ta xài thêm flag `-d` để chạy ngầm container, nếu không thêm flag này thì terminal sẽ bị kẹt và ta không làm việc tiếp được. Nếu xài `Ctrl+C` thì container sẽ bị stop ngay. Tiếp theo là flag `-p` để map port. Ở đây ta map port 80 trong container ra port 8080 trên host (nginx mặc định chạy trên port 80). 
 
-Test bằng curl: 
+
+
+Cuối cùng, test bằng curl xem có chạy được chưa: 
 ```
 ❯ curl -I http://127.0.0.1:8080
 HTTP/1.1 200 OK
@@ -147,4 +154,13 @@ Khi ta chạy một môi trường containerized, về cơ bản ta đang tạo 
 
 Ngoài ra ta có thể lưu trữ các images bên trong các registry công khai hoặc riêng tư để dễ dàng phân phối và triển khai chúng trên các môi trường khác nhau.
 
-Ví dụ: khi ta chạy `docker run nginx` và `sudo docker run -d --name web -p 8080:80 nginx` thì ta đã tạo ra các container từ cùng một docker image là nginx. Tuy nhiên, mỗi container sẽ có các trạng thái riêng biệt với nhau.  
+Ví dụ: khi chạy `sudo docker run nginx` và `sudo docker run -d --name web -p 8080:80 nginx` thì ta đã tạo ra các container từ cùng một docker image là nginx. Tuy nhiên, mỗi container sẽ có các trạng thái riêng biệt với nhau.  
+
+
+
+### Dockerfile 
+
+Để build một docker image thì ta cần một Dockerfile. 
+
+
+## Docker compose 
