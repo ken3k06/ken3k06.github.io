@@ -4,6 +4,7 @@
 entries:
   - title: info
     entries:
+      - title: full name - Le Tri Duc
       - title: second-year at UIT-VNUHCM, majoring in information security.
       - title: github repo
         url: https://github.com/ken3k06
@@ -19,7 +20,7 @@ entries:
 
   - title: misc
     post_list:
-      limit: 1 
+      limit: 5
       category: misc
       show_more: true
       show_more_text: See more posts...
@@ -41,9 +42,9 @@ entries:
   #         - title: with subsubitems
   #         - title: example page
   #           url: about
-  - title: about this site
+  - title: some notes
     entries:
       - title: There are still many things to improve here; one of them is code syntax highlighting. Currently the syntax is only black and white (LOL). 
       - title: will update more post on cryptanalysis and security T.T 
-      - title: ~~i use arch btw~~
+      - title: ~~i dont use arch btw~~
 

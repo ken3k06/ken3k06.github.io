@@ -4,13 +4,10 @@ category: crypto
 Title: Basic of Lattice-based Cryptography
 ---
 
-## Table of Content
-- [Vector Spaces](#vector-spaces)
-
+* This will become a table of contents (this text will be scrapped).
+{:toc}  
 
 ## Vector Spaces 
-
-
 
 Recall a vector space $V$ over a field $K$ (said $\mathbb{R}$ or $\mathbb{C}$) is a set of "vectors", with the addition of vectors and multiplication of a vector by a scalar, satisfying certain properties: 
 
