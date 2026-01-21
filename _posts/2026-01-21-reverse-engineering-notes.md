@@ -70,6 +70,24 @@ sudo snap install ghidra
 ```
 ## Basic assembly 
 
+## Hệ điều hành Linux 
+Linux là một hệ điều hành hiện đại, miễn phí dựa trên UNIX. Nhân Linux bắt đầu được phát triển bởi Linus Torvalds vào năm 1991 với mục đích ban đầu để tương thích với UNIX. 
+
+Cần phân biệt rõ giữa hai khái niệm sau: 
+- Linux kernel: Phần mềm gốc được phát triển từ đầu bởi cộng đồng Linux 
+- Linux system: Tập hợp các thành phần được phát triển dựa trên Linux kernel, bao gồm các thư viện hệ thống, công cụ dòng lệnh, trình quản lý gói, giao diện người dùng đồ họa (GUI) và các ứng dụng khác.
+
+**Các thành phần chính của hệ thống Linux**: Như phần lớn các hệ thống UNIX, hệ thống Linux bao gồm 3 thành phần chính: nhân, thư viện hệ thống và công cụ hệ thống.
+
+
+Nhân chịu trách nhiệm duy trì các hoạt động ở mức trừu tượng của hệ điều hành, như bộ nhớ ảo và tiến trình. 
+- Các mã của nhân thực thi ở kernel mode với đầy đủ quyền truy xuất đến tài nguyên vật lí của máy tính. 
+- Tất cả các mã của nhân và cấu trúc dữ liệu được lưu trên cùng một không gian địa chỉ. 
+
+Các thư viện hệ thống (system librariies) định nghĩa một chuẩn các hàm mà thông qua đó các ứng dụng có thể tương tác với nhân. Các thư viện này cài đặt nhiều chức năng của hệ điều hành mà không cần đầy đủ quyền như các mã của nhân. 
+
+Các công cụ hệ thống (system utilities) là các chương trình thực hiện các chức năng quản lí cụ thể. 
+
 
 
 ## Reversing.kr
