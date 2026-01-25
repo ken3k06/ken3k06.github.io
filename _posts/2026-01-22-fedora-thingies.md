@@ -111,3 +111,11 @@ Sau đó mình cần chạy các lệnh sau:
 sudo dnf update --refresh
 sudo dnf system-upgrade download --releasever=43
 ```
+
+Nhớ kiểm tra check-sum lại: <a href="https://discussion.fedoraproject.org/t/checksum-verification-error-for-fedora-43/171528" > Checksum verification error for Fedora 43 </a>
+
+Sau khi xong thì chạy 2 lệnh sau:
+```
+sudo dnf offline reboot
+```
+
