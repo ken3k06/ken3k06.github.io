@@ -1,7 +1,7 @@
 ---
 layout: post 
 category: crypto 
-Title: Basic of Lattice-based Cryptography
+title: Basic of Lattice-based Cryptography
 ---
 
 * This will become a table of contents (this text will be scrapped).

@@ -28,20 +28,24 @@ entries:
 
 
   
-  - title: cryptography 
+  - title: cryptography/math  
     post_list:
       limit: 5
       category: crypto 
       show_more: true
       show_more_text: See more posts...
       show_more_url: crypto-archive.html
-  # - title: another list
-  #   entries:
-  #     - title: with subitems
-  #       entries:
-  #         - title: with subsubitems
-  #         - title: example page
-  #           url: about
+
+  
+  - title: another list
+    post_list:
+      limit: 5
+      category: others 
+      show_more: true
+      show_more_text: See more posts...
+      show_more_url: another-archive.html
+
+
   - title: some notes
     entries:
       - title: There are still many things to improve here; one of them is code syntax highlighting. Currently the syntax is only black and white (LOL). 

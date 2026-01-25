@@ -93,3 +93,21 @@ Một số bài viết hay nên đọc:
 - <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/storage_administration_guide/index"> Storage Administration Guide </a>
 
 - <a href="https://discussion.fedoraproject.org/t/how-to-take-care-of-your-btrfs-filesystem-health-on-atomic-desktops/146309"> How to take care of your BTRFS filesystem health </a>
+
+## Note số 2
+
+Fedora 42 sẽ EOL vào ngày 13 tháng 5 sắp tới. Thông tin chi tiết có thể tham khảo tại: <a href="https://fedorapeople.org/groups/schedule/f-44/f-44-key-tasks.html"> Fedora 44 Key Tasks </a>
+
+
+Để kiểm tra update thì mọi người vào phần Discover trên Fedora Desktop. Sau đó chọn mục update.
+
+<img src="{{ '/assets/images/fedora/update43.png' | relative_url }}" 
+  alt="..." 
+  width="600">
+Nó sẽ tự động tải các gói cần thiết xuống. Sau đó máy sẽ được khởi động lại. 
+
+Sau đó mình cần chạy các lệnh sau:
+```
+sudo dnf update --refresh
+sudo dnf system-upgrade download --releasever=43
+```

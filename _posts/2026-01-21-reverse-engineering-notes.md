@@ -1,7 +1,7 @@
 ---
 layout: post 
 category: misc 
-Title: Some notes on Reverse Engineering 
+title: Some notes on Reverse Engineering 
 ---
 
 Mục đích của bài này là để mình tổng hợp lại những kiến thức đã học trong quá trình tập tành chơi Reverse, nên có gì sai sót mong nhận được sự góp ý từ mọi người. 
