@@ -136,6 +136,33 @@ Hiển nhiên nó là một hệ sinh của $\mathbb{Q}[\sqrt[3]{2}]$. Ta cần 
 Một lần nữa ta lại có $\displaystyle b\vdots 2$ và đặt $\displaystyle b=2b_{1}$. Thay lại ta cũng có được $\displaystyle c\vdots 2$ và cứ như vậy $\displaystyle a_{1} \vdots 2$, v.v... nhưng do $\displaystyle a,b,c$ đều là số nguyên cho nên việc chia đôi như vậy sẽ phải dừng lại sau hữu hạn bước dẫn tới mâu thuẫn. Vậy ta có điều phải chứng minh. 
 
 
+**Bài tập:** Giả sử $u \in \mathbb{C}$. Cho biết khi nào thì $[\mathbb{Q}(u):\mathbb{Q}]=2$
+
+*Giải:* 
+
+ $[\mathbb{Q}(u):\mathbb{Q}]=2$ tương đương với việc $\mathbb{Q}(u)$ là một không gian vector trên $\mathbb{Q}$ có cơ sở gồm hai phần tử. Nhận thấy rằng $u \notin \mathbb{Q}$ vì nếu $u \in \mathbb{Q}$ thì $\mathbb{Q}(u) = \mathbb{Q}$ và bậc mở rộng sẽ là 1. Mặt khác, tập $\lbrace 1,u,u^2 \rbrace$ là phụ thuộc tuyến tính, tức là tồn tại $a,b,c\in \mathbb{Q}$ không đồng thời bằng 0 sao cho $u$ là một nghiệm của đa thức $f(x)=ax^2+bx+c$. Mặt khác do $u \notin \mathbb{Q}$ cho nên $a \neq 0$. Hơn nữa $f(x)$ cũng phải là đa thức bất khả quy trên $\mathbb{Q}$ vì nếu không thì $u$ sẽ là nghiệm hữu tỉ. 
+ 
+ 
+ Do đó $\Delta = b^2-4ac$ không là bình phương của một số hữu tỉ cho nên $u$ có dạng $u=r \pm \sqrt{s}$ với $r,s \in \mathbb{Q}, s \neq k^2, k \in \mathbb{Q}$.
+
+
+Chiều ngược lại thì làm tương tự như bài trước đó. 
+
+
+## Mở rộng đơn 
+
+**Định nghĩa.** CHo $F$ là một mở rộng của $K$. Khi đó, ta nói rằng $F$ là một mở rộng đơn của $K$ nếu tồn tại một phần tử $u \in F$ sao cho $F=K(u)$. $u$ lúc này được gọi là phần tử nguyên thủy của $F$. 
+
+Giả sử $F$ là một mở rộng của trường $K$ và $u \in F$. Phần tử $u$ được gọi là đại số trên $K$ nếu tồn tại một đa thức bậc dương $f(x) \in K[x]$ sao cho $f(u)=0$. Ngược lại, trong trường hợp $u$ không là nghiệm của bất kì một đa thức bậc dương nào trên $K$ thì $u$ được gọi là phần tử siêu việt trên $K$. 
+
+Ví dụ: $\sqrt{2}$ là đại số trên $\mathbb{Q}$ vì nó là nghiệm của đa thức $x^2-2$. Ngược lại, số $\pi$ là phần tử siêu việt trên $\mathbb{Q}$. 
+
+
+Cho $F$ là một mở rộng của trường $K$ và $u \in F$ là phần tử đại số trên $K$. Khi đó tồn tại một đa thức $p(x) \in K[x]$ bất khả quy nhận $u$ làm nghiệm. Hơn nữa, nếu $u$ là nghiệm của một đa thức $f(x) \in K[x]$ thì $f(x)$ chia hết cho $p(x)$. Đa thức $p(x)$ được gọi là đa thức tối thiểu của $u$ trên $K$. 
+
+
+
+
 
 # Một số ứng dụng của lí thuyết Galois 
 
