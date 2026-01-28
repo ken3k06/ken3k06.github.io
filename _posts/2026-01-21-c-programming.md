@@ -345,7 +345,9 @@ Lỗi đầu tiên đó là ta khai báo hàm `B` trước khi khai báo hàm `A
 
 Nếu sửa lại `int A()` ở sau thì chỉ còn lại lỗi `implicit declaration of function A`
 
-![image](https://hackmd.io/_uploads/B1ch7v_gZe.png)
+<img src="{{ '/assets/images/c-prog/func.png' | relative_url }}" 
+  alt="..." 
+  width="600">
 
 
 # Mảng 1 chiều
