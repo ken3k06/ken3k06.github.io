@@ -1,5 +1,5 @@
 ---
-layout: post 
+layout: page
 category: others
 title: sum muziks
 ---

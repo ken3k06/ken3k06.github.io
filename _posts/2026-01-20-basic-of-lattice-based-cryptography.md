@@ -4,8 +4,12 @@ category: crypto
 title: Basic of Lattice-based Cryptography
 ---
 
+
+
 * This will become a table of contents (this text will be scrapped).
 {:toc}  
+
+The cryptography that secures the Internet is evolving, and it's time to catch up especially when we know that in the future, quantum computers will break both ECC and RSA. In this post, I will give a brief introduction to lattice-based cryptography, one of the new post-quantum cryptographic schemes.
 
 ## Vector Spaces 
 
@@ -24,7 +28,7 @@ Recall a vector space $V$ over a field $K$ (said $\mathbb{R}$ or $\mathbb{C}$) i
   alt="..." 
   width="500">
 
-Since we know in linear algebra that every n-dimensional vector space over $R$ is isomorphic to $\mathbb{R}^n$, let focus on the case of $\mathbb{R}^n$, which can be realized as a $n$-tuple of real number $(x_1,x_2,...,x_n)$, where each $x_i \in \mathbb{R}$. 
+Since we know in linear algebra that every $n$-dimensional vector space over $\mathbb{R}$ is isomorphic to $\mathbb{R}^n$, let focus on the case of $\mathbb{R}^n$, which can be realized as a $n$-tuple of real number $(x_1,x_2,...,x_n)$, where each $x_i \in \mathbb{R}$. 
 
 Two $n$-tuples $(a_1,a_2,...,a_n)$ and $(b_1,b_2,...,b_n)$ are called equal if and only if $a_i = b_i$ for all $i = 1,2,...,n$.
 
@@ -37,9 +41,7 @@ For example, the set $\lbrace (0,1),(1,0) \rbrace$ can generate every vector $(x
 
 We can generalize this idea to $n$-dimension vector space $\mathbb{R}^n$ by taking the linear combination of the standard basis vectors $\lbrace (1,0,0,...,0),(0,1,0,...,0),...,(0,0,0,...,1) \rbrace$.
 
-<img  src="{{ '/assets/images/lattice/lattice1.png' | relative_url }}" 
-  alt="..." 
-  width="500">
+
 
 Next, we need to understand what is a subspace of a vector space. 
 
@@ -54,3 +56,32 @@ The set consisting of all linear combinations of the vectors in $W$ is called th
 
 By default, we have $span(\emptyset) = \lbrace 0 \rbrace$.
 
+
+The span of any subset $W$ of a vector space $V$ is a subspace of $V$. Moreover, any subspace of $V$ that contains $W$ must also contain $span(W)$.
+
+**Definition:** A subset $W$ of a vector space $V$ generates $V$ if $span(W)=V$. 
+
+For example, the vectors $(1,1,0),(1,0,1),(0,1,1)$ generate $\mathbb{R}^3$ since any vector $(x,y,z) \in \mathbb{R}^3$ can be written as a linear combination of these vectors:
+
+
+We have known that there are some vectors that can be written as a linear combination of other vectors in the same set. This lead us to two important definitions: linear independence and basis.
+
+**Definition:** A subset $W$ of a vector space $V$ is called linearly dependent if there exist a finite number of distinct vectors $w_1,...,w_k$ in $W$ and scalars $a_1,a_2,...,a_k$, not all zero, such that $a_1w_1 + a_2w_2 + ... + a_kw_k = 0$. If no such scalars exist, then $W$ is called linearly independent.
+
+Thus, a set of vectors is linearly independent if no vector in the set can be expressed as a linear combination of the other vectors in the set.
+
+We can observe that, if $W$ generates $V$ and is linearly independent, then every vector in $V$ can be uniquely expressed as a linear combination of the vectors in $W$. $W$ is then called a **basis** of $V$.
+
+
+**Definition:** A basis $\beta$ for a vector space $V$ is a linearly independent subset of $V$ that generates $V$. 
+
+
+If $V$ has a finite basis, then every basis of $V$ has the same number of elements. This number is called the dimension of $V$ and is denoted by $dim(V)$.
+
+## Lattices 
+
+
+
+## Books and resources 
+
+- https://eprint.iacr.org/2023/032.pdf

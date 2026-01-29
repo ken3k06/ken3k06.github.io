@@ -25,3 +25,15 @@ Restart lại bằng docker compose như sau:
 ```bash
 docker compose up -d --force-recreate --build
 ```
+
+Mặc định thì các container sẽ được tự động chạy mỗi khi restart máy, để tắt cài đặt này thì có thể chạy lệnh sau: 
+```bash 
+sudo docker update --restart=no rctf-rctf-1\nsudo docker update --restart=no rctf-postgres-1\nsudo docker update --restart=no rctf-redis-1\n
+```
+
+Kiểm tra lại: 
+```bash 
+docker ps -a 
+sudo docker stop rctf-rctf-1 rctf-postgres-1 rctf-redis-1\n
+```
+

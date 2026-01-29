@@ -20,7 +20,7 @@ entries:
 
   - title: misc
     post_list:
-      limit: 5
+      limit: 4
       category: misc
       show_more: true
       show_more_text: See more posts...
@@ -30,7 +30,7 @@ entries:
   
   - title: cryptography/math  
     post_list:
-      limit: 5
+      limit: 4
       category: crypto 
       show_more: true
       show_more_text: See more posts...
@@ -39,7 +39,7 @@ entries:
   
   - title: another list
     post_list:
-      limit: 5
+      limit: 2
       category: others 
       show_more: true
       show_more_text: See more posts...
