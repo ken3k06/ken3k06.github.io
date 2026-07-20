@@ -1,0 +1,51 @@
+baseURL = 'https://ken3k06.github.io/'
+locale = 'en-us'
+title = 'dvcks blog'
+theme = "risotto"
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 10
+
+
+[[menu.main]]
+name = "Posts"
+url = "/posts/"
+weight = 10
+
+
+[params.theme]
+palette = "tokyo-night-dark"
+
+sectionPagesMenu = "main"
+
+[params.about]
+title = "dvck13"
+description = "Math, Cryptography and CTF"
+logo = "🫩"
+
+[[params.socialLinks]]
+icon = "fa-brands fa-github"
+title = "GitHub"
+url = "https://github.com/ken3k06"
+
+[[params.socialLinks]]
+icon = "fa-solid fa-envelope"
+title = "Email"
+url = "mailto:letriduc.dn@gmail.com"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['$$', '$$']]
+          inline = [['$', '$']]
+
