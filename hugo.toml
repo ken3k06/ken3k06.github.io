@@ -3,6 +3,10 @@ locale = 'en-us'
 title = 'dvcks blog'
 theme = "risotto"
 
+
+sectionPagesMenu = "main"
+
+
 [[menu.main]]
 identifier = "about"
 name = "About"
@@ -10,16 +14,11 @@ url = "/about/"
 weight = 10
 
 
-[[menu.main]]
-name = "Posts"
-url = "/posts/"
-weight = 10
 
 
 [params.theme]
-palette = "tokyo-night-dark"
+palette = "tokyo-night-light"
 
-sectionPagesMenu = "main"
 
 [params.about]
 title = "dvck13"
@@ -48,4 +47,5 @@ url = "mailto:letriduc.dn@gmail.com"
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['$$', '$$']]
           inline = [['$', '$']]
+
 

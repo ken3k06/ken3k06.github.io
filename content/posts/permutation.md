@@ -198,4 +198,170 @@ Tiếp theo ta xét $\displaystyle r=2k$ thì tương tự như vậy $\displays
 
 ### Bài 2
 
+**Đề bài.** Với mọi dãy hữu hạn $\displaystyle ( x_{1} ,x_{2} ,...,x_{n})$, kí hiệu $\displaystyle N( x_{1} ,x_{2} ,...,x_{n})$ là số lượng cặp chỉ số $\displaystyle ( i,j)$ sao cho $\displaystyle 1\leqslant i< j\leqslant n$ và $\displaystyle x_{i} =x_{j}$. Cho $\displaystyle p$ là một số nguyên tố lẻ thỏa mãn $\displaystyle 1\leqslant n< p$ và $\displaystyle a_{1} ,a_{2} ,...,a_{n}$ và $\displaystyle b_{1} ,b_{2} ,...,b_{n}$ là các lớp thặng dư theo tùy ý theo modulo $\displaystyle p$. Chứng minh rằng tồn tại một hoán vị $\displaystyle \pi $ của các chỉ số $\displaystyle 1,2,...,n$ sao cho 
 
+$$
+\begin{equation*}
+N( a_{1} +b_{\pi ( 1)} ,a_{2} +b_{\pi ( 2)} ,...,a_{n} +b_{\pi ( n)}) \leqslant \min( N( a_{1} ,a_{2} ,...,a_{n}) ,N( b_{1} ,b_{2} ,...,b_{n}))
+\end{equation*}
+$$
+
+
+
+*Giải.* 
+
+Tương tự bài trước, ta có các kí hiệu như sau: $\displaystyle S_{m}$ để chỉ tập các hoán vị của $\displaystyle \{1,2,...,m\}$ và với mỗi $\displaystyle \sigma \in S_{m}$ ta có $\displaystyle \operatorname{sgn} \sigma $ để chỉ dấu của hoán vị. Nếu $\displaystyle \sigma $ là hoán vị chẵn thì $\displaystyle \operatorname{sgn} \sigma =+1$ và ngược lại, nếu $\displaystyle \sigma $ là hoán vị lẻ thì $\displaystyle \operatorname{sgn} \sigma =-1$
+
+Trường hợp đơn giản nhất, ta sẽ thử chứng minh bài toán với dãy $\displaystyle a_{1} ,a_{2} ,...,a_{n}$ đôi một phân biệt. Như vậy $\displaystyle N( a_{1} ,a_{2} ,...,a_{n}) =0$ dẫn tới $\displaystyle \min( N( A) ,N( B)) =0$ với $\displaystyle A=( a_{1} ,a_{2} ,...,a_{n})$ và $\displaystyle B=( b_{1} ,b_{2} ,...,b_{n})$. Vì vai trò của $\displaystyle A$ và $\displaystyle B$ là như nhau cho nên ta chỉ cần chứng minh với $\displaystyle A$ là đủ. 
+
+
+
+Ta cần chỉ ra rằng tồn tại một hoán vị $\displaystyle \pi $ sao cho $\displaystyle \{a_{i} +b_{\pi ( i)}\}_{i=1}^{n}$ gồm các lớp thặng dư phân biệt theo modulo $\displaystyle p$.
+
+Để chứng minh ta sẽ dùng tới định lý không điểm tổ hợp như sau: 
+
+**Bổ đề.** Cho $\displaystyle \mathbb{R}$ là một trường bất kì và $\displaystyle P( x_{1} ,x_{2} ,...,x_{n}) \in \mathbb{R}[ x_{1} ,x_{2} ,...,x_{n}]$ là một đa thức có bậc $\displaystyle \deg P=t_{1} +t_{2} +...+t_{n}$ với $\displaystyle t_{i}$ là các số nguyên không âm và hệ số của đơn thức $\displaystyle x_{1}^{t_{1}} x_{2}^{t_{2}} ...x_{n}^{t_{n}}$ khác $\displaystyle 0$. Nếu $\displaystyle S_{1} ,S_{2} ,...,S_{n} \subset \mathbb{R}$ sao cho $\displaystyle |S_{i} | >t_{i}$ thì tồn tại bộ $\displaystyle ( s_{1} ,s_{2} ,...,s_{n}) \in S_{1} \times S_{2} \times ...\times S_{n}$ sao cho $\displaystyle P( s_{1} ,s_{2} ,...,s_{n}) \neq 0$.
+
+
+*Chứng minh.*
+
+Ta chứng minh quy nạp theo $\displaystyle \deg P$. Trường hợp $\displaystyle \deg P=1$ thì không mất tính tổng quát giả sử $\displaystyle t_{1} =1$, lúc này hệ số của $\displaystyle x_{1}^{t_{1}}$ khác 0 cho nên khẳng định của định lí là hiển nhiên.
+
+Giả sử bổ đề đúng với mọi đa thức $\displaystyle P$ sao cho $\displaystyle \deg P< d$. Ta chứng minh bổ đề vẫn đúng với $\displaystyle \deg P=d$.
+
+Giả sử phản chứng rằng tồn tại một đa thức $\displaystyle P( s_{1} ,s_{2} ,...,s_{n}) =0$ với mọi $\displaystyle ( s_{1} ,s_{2} ,...,s_{n}) \in S_{1} \times S_{2} \times ...\times S_{n}$. Do $\displaystyle \deg P=t_{1} +t_{2} +...+t_{n}  >0$ cho nên không mất tính tổng quát, ta có thể giả sử $\displaystyle t_{1}  >0$. Cố định $\displaystyle s_{1} \in S_{1}$. Lúc này ta coi $\displaystyle P$ như một đa thức theo biến $\displaystyle x_{1}$ với các hệ số thuộc $\displaystyle \mathbb{R}[ x_{2} ,...,x_{n}]$. Thực hiện thuật toán chia đa thức ta được 
+
+$$
+\begin{equation*}
+P=( x_{1} -s_{1}) Q+R
+\end{equation*}
+$$
+
+trong đó $\displaystyle \deg_{x_{1}} Q=\deg_{x_{1}} P-1$. Vì bậc của $\displaystyle R$ theo biến $\displaystyle x_{1}$ là bé hơn $\displaystyle x_{1} -s_{1}$ nên ta có $\displaystyle \deg_{x_{1}} R\leqslant 0$ và đa thức $\displaystyle R$ không chứa biến $\displaystyle x_{1}$. Do giả thiết, đa thức $\displaystyle Q$ phải chứa đơn thức $\displaystyle x_{1}^{t_{1} -1} x_{2}^{t_{2}} ...x_{n}^{t_{n}}$ với hệ số khác $\displaystyle 0$. Thay $\displaystyle x_{1} =s_{1}$ và $\displaystyle ( s_{2} ,...,s_{n}) \in S_{2} \times ...S_{n}$ vào đẳng thức trên và áp dụng giả thiết phản chứng ta có 
+
+$$
+\begin{gather*}
+P( s_{1} ,...,s_{n}) =( s_{1} -s_{1}) Q( s_{1} ,s_{2} ,...,s_{n}) +R( s_{2} ,...,s_{n})\\
+\Longrightarrow 0=R( s_{2} ,...,s_{n})
+\end{gather*}
+$$
+
+hay $\displaystyle R( s_{2} ,...,s_{n}) =0$ với mọi $\displaystyle ( s_{2} ,...,s_{n}) \in S_{2} \times ...\times S_{n}$ 
+
+Điều này dẫn tới 
+
+$$
+\begin{gather*}
+P\left( s_{1}^{'} ,s_{2} ,...,s_{n}\right) =0=\left( s_{1}^{'} -s_{1}\right) Q\left( s_{1}^{'} ,s_{2} ,...,s_{n}\right)\\
+\Longrightarrow Q\left( s_{1}^{'} ,s_{2} ,...,s_{n}\right) =0,\forall \left( s_{1}^{'} ,s_{2} ,...,s_{n}\right) \in ( S_{1} \backslash \{s_{1}\}) \times S_{2} \times ...\times S_{n}
+\end{gather*}
+$$
+
+Do $\displaystyle \deg Q=( t_{1} -1) +t_{2} +...+t_{n}$ và hệ số của $\displaystyle x_{1}^{t_{1} -1} x_{2}^{t_{2}} ...x_{n}^{t_{n}}$ khác 0 cho nên theo giả thiết quy nạp với $\displaystyle t_{1}^{'} =t_{1} -1$ và $\displaystyle S_{1}^{'} =S_{1} \backslash \{s_{1}\}$ thì ta có điều mâu thuẫn. 
+
+Từ đây ta có điều phải chứng minh. 
+
+Bây giờ ta sẽ chứng minh nhận xét: Tồn tại một hoán vị $\displaystyle \pi $ sao cho $\displaystyle \{a_{i} +b_{\pi ( i)}\}_{i=1}^{n}$ gồm các lớp thặng dư phân biệt theo modulo $\displaystyle p$.
+
+*Chứng minh.* 
+
+Ta kí hiệu đa thức Vandermonde cho các biến $\displaystyle x_{1} ,...,x_{n}$ như sau
+
+$$
+\begin{gather*}
+V( x_{1} ,x_{2} ,...,x_{n}) =\prod _{1\leqslant i< j\leqslant n}( x_{j} -x_{i})\\
+=\det\begin{pmatrix}
+1 & x_{1} & x_{1}^{2} & \dotsc  & x_{1}^{n-1}\\
+1 & x_{2} & x_{2}^{2} & \dotsc  & x_{2}^{n-1}\\
+\vdots  & \vdots  & \vdots  & \ddots  & \vdots \\
+1 & x_{n} & x_{n}^{2} & \dotsc  & x_{n}^{n-1}
+\end{pmatrix}\\
+=\sum _{\sigma \in S_{n}}\left(\operatorname{sgn} \sigma \right) x_{1}^{\sigma ( 1) -1} x_{2}^{\sigma ( 2) -1} \dotsc x_{n}^{\sigma ( n) -1}
+\end{gather*}
+$$
+
+Ta nhận thấy rằng nếu như $\displaystyle x_{i} \neq x_{j} ,\forall i,j$ thì đa thức Vandermonde sẽ khác $\displaystyle 0$. Hơn nữa nó còn là đa thức luân phiên, tức là với mỗi $\displaystyle \pi \in S_{n}$ thì ta có 
+
+$$
+\begin{equation*}
+V( x_{\pi ( 1)} ,...,x_{\pi ( n)}) =\left(\operatorname{sgn} \pi \right) V( x_{1} ,...,x_{n})
+\end{equation*}
+$$
+
+
+Xét đa thức sau với các hệ số trong trường $\displaystyle \mathbb{F}_{p}$ 
+
+$$
+\begin{equation*}
+f( x_{1} ,...,x_{n}) =V( x_{1} ,...,x_{n}) \cdot V( x_{1} +b_{1} ,...,x_{n} +b_{n})
+\end{equation*}
+$$
+
+$\displaystyle \deg f=t_{1} +...+t_{n} =n( n-1)$ và $\displaystyle t_{1} =...=t_{n} =n-1$ và $\displaystyle S_{1} =...=S_{n} =\{a_{1} ,...,a_{n}\}$. Để áp dụng được bổ đề ta cần tính hệ số của $\displaystyle x_{1}^{n-1} ...x_{n}^{n-1}$ để đảm bảo nó khác $\displaystyle 0$.Khai triển $\displaystyle f$ ta có 
+
+$$
+\begin{gather*}
+f( x_{1} ,...,x_{n}) =\left(\sum _{\sigma \in S_{n}}\left(\operatorname{sgn} \sigma \right) \cdot \prod _{i=1}^{n} x_{i}^{\sigma ( i) -1}\right)\left(\sum _{\tau \in S_{n}}\left(\operatorname{sgn} \tau \right) \cdot \prod _{i=1}^{n}( x_{i} +b_{i})^{\tau ( i) -1}\right)\\
+=\sum _{\sigma \in S_{n}}\sum _{\tau \in S_{n}}\left(\operatorname{sgn} \sigma \right) \cdot \left(\operatorname{sgn} \tau \right) \cdot \left(\prod _{i=1}^{n} x_{i}^{\sigma ( i) -1}\right)\left(\prod _{i=1}^{n}( x_{i} +b_{i})^{\tau ( i) -1}\right)
+\end{gather*}
+$$
+
+Nhận xét rằng đơn thức $\displaystyle x_{1}^{n-1} ...x_{n}^{n-1}$ chỉ xuất hiện tại các hoán vị thỏa mãn $\displaystyle \sigma ( i) -1+\tau ( i) -1=n-1$ tương đương với $\displaystyle \sigma ( i) +\tau ( i) =n+1$
+
+Xét $\displaystyle \varphi \in S_{n}$ là một hoán vị thỏa mãn $\displaystyle \varphi ( i) =n+1-i$ thì lúc này $\displaystyle \varphi ( \sigma ( i)) =\varphi ( n+1-\tau ( i)) =( n+1) -( n+1-\tau ( i)) =\tau ( i)$ cho nên $\displaystyle \tau =\varphi \circ \sigma$ dẫn tới 
+
+$$
+\begin{gather*}
+\sigma \cdot \tau ^{-1} =\sigma \cdot \left( \sigma ^{-1} \cdot \varphi ^{-1}\right) =\varphi ^{-1}\\
+\Longrightarrow \operatorname{sgn}\left( \sigma \cdot \tau ^{-1}\right) =\operatorname{sgn}\left( \varphi ^{-1}\right) =\operatorname{sgn}\left( \varphi ^{-1}\right) =\operatorname{sgn}( \sigma \cdot \tau )
+\end{gather*}
+$$
+
+vì $\displaystyle \operatorname{sgn}\left( \phi ^{-1}\right) =\operatorname{sgn}( \phi )$. Điều nãy dẫn tới hệ số của $\displaystyle x_{1}^{n-1} ...x_{n}^{n-1}$ sẽ là $\displaystyle n!\operatorname{sgn}( \varphi )$. Vì với mỗi hoán vị $\displaystyle \sigma $ như vậy ta chọn được duy nhất một hoán vị $\displaystyle \tau $ thỏa mãn $\displaystyle \sigma ( i) +\tau ( i) =n+1$ và có $\displaystyle n!$ hoán vị $\displaystyle \sigma $ cho nên ta có $\displaystyle n!\times \operatorname{sgn}( \varphi )$. Rõ ràng hệ số này khác 0 vì $\displaystyle n< p$ cho nên $\displaystyle n!$ không chia hết cho $\displaystyle p$. 
+
+
+
+Theo bổ đề thì tồn tại các phần tử $\displaystyle s_{1} ,s_{2} ,...,s_{n} \in \{a_{1} ,a_{2} ,...,a_{n}\}$ sao cho $\displaystyle f( s_{1} ,s_{2} ,...,s_{n}) \neq 0$. Do $\displaystyle \mathbb{F}_{p}$ là một trường cho nên ta có $\displaystyle V( s_{1} ,...,s_{n}) \neq 0$ và $\displaystyle V( s_{1} +b_{1} ,...,s_{n} +b_{n}) \neq 0$. $\displaystyle V( s_{1} ,...,s_{n}) \neq 0$ khi và chỉ khi $\displaystyle s_{1} ,...,s_{n}$ đôi một phân biệt hay nói cách khác dãy $\displaystyle s_{i}$ là một hoán vị của $\displaystyle a_{i}$ : $\displaystyle s_{i} =a_{\pi ( i)}$. Tương tự ta cũng có $\displaystyle a_{\pi ( i)} +b_{i}$ đôi một phân biệt do $\displaystyle V( s_{1} +b_{1} ,...,s_{n} +b_{n})$ khác $\displaystyle 0$. Từ đây ta có điều phải chứng minh. 
+
+Tiếp theo ta sẽ chứng minh khẳng định sau và hoàn tất bài toán: Do $\displaystyle A$ và $\displaystyle B$ có vai trò như nhau nên không mất tính tổng quát giả sử $\displaystyle N( a_{1} ,...,a_{n}) \leqslant N( b_{1} ,...,b_{n})$. Lúc này $\displaystyle \min( N( a_{1} ,...,a_{n}) ,N( b_{1} ,...,b_{n})) =N( a_{1} ,...,a_{n})$.
+
+Cuối cùng ta cần chứng minh rằng: Với $\displaystyle 0\leqslant n< p$, tồn tại một hoán vị $\displaystyle \pi \in S_{n}$ sao cho $\displaystyle N( a_{1} +b_{\pi ( 1)} ,...,a_{n} +b_{\pi ( n)}) \leqslant N( a_{1} ,...,a_{n})$
+
+*Chứng minh.* 
+
+Ta sẽ quy nạp theo $\displaystyle n$. Khẳng định là hiển nhiên cho $\displaystyle n=0,n=1$. Xét $\displaystyle 2\leqslant n< p$ và giả sử khẳng định là đúng cho các trường hợp nhỏ hơn. 
+
+
+
+Xét trong dãy $\displaystyle a_{1} ,...,a_{n}$ có $\displaystyle k$ phần tử phân biệt. Ta sắp xếp chúng lại theo thứ tự $\displaystyle a_{1} ,a_{2} ,...,a_{k}$. Còn lại $\displaystyle a_{k+1} ,...,a_{n}$, mỗi số trong đây sẽ tạo thành 1 cặp với các số trong $\displaystyle a_{1} ,...,a_{k}$ để tạo thành 1 cặp $\displaystyle i\leqslant k< j$ thỏa mãn $\displaystyle a_{i} =a_{j}$ và có đúng $\displaystyle n-k$ cặp như vậy. Như vậy 
+\begin{equation*}
+N( a_{1} ,...,a_{n}) =( n-k) +N( a_{k+1} ,...,a_{n})
+\end{equation*}
+Các phần tử trong $\displaystyle a_{k+1} ,...,a_{n}$ không đảm bảo là phân biệt vì có thể có nhiều hơn 1 phần tử trong dãy trên bằng với các phần tử trong dãy $\displaystyle a_{1} ,...,a_{k}$. 
+
+Theo nhận xét ở trên thì tồn tại một hoán vị $\displaystyle \pi _{1}$ của $\displaystyle 1,2,...,k$ sao cho $\displaystyle a_{1} +b_{\pi _{1}( 1)} ,...,a_{k} +b_{\pi _{1}( k)}$ đôi một phân biệt. Mặt khác theo giả thiết quy nạp thì tồn tại hoán vị $\displaystyle \pi _{2}$ của $\displaystyle k+1,...,n$ sao cho 
+
+$$
+\begin{equation*}
+N( a_{k+1} +b_{\pi _{2}( k+1)} ,...,a_{n} +b_{\pi _{2}( n)}) \leqslant N( a_{k+1} ,...,a_{n})
+\end{equation*}
+$$
+
+Ta sẽ kết hợp $\displaystyle \pi _{1}$ và $\displaystyle \pi _{2}$ lại để tạo ra một hoán vị mới là $\displaystyle \pi $. Hai hoán vị $\displaystyle \pi _{1}$ và $\displaystyle \pi _{2}$ không giao nhau vì chúng là hoán vị của hai tập khác nhau. Lúc này, từ định nghĩa của $\displaystyle \pi _{1}$ ta có $\displaystyle a_{1} +b_{\pi ( 1)} ,...,a_{k} +b_{\pi ( k)}$ là phân biệt. Mặt khác với mỗi $\displaystyle k< j\leqslant n$ thì tồn tại tối đa một chỉ số $\displaystyle i\leqslant k$ sao cho $\displaystyle a_{i} +b_{\pi ( i)} =a_{j} +b_{\pi ( j)}$. Dẫn tới bất đẳng thức sau
+
+$$
+\begin{gather*}
+N( a_{1} +b_{\pi ( 1)} ,...,a_{n} +b_{\pi ( n)}) \leqslant n-k+N( a_{k+1} +b_{\pi ( k+1)} ,...,a_{n} +b_{\pi ( n)})\\
+\leqslant n-k+N( a_{k+1} ,...,a_{n}) =N( a_{1} ,...,a_{n})
+\end{gather*}
+$$
+
+Vậy ta có điều phải chứng minh và bài toán hoàn tất. 
+
+### Bài 3
+
+**Đề bài.** Cho $\displaystyle n$ là một số nguyên dương. Marci viết $\displaystyle n$ số nguyên dương vào vở theo một thứ tự ngẫu nhiên và chỉ có một mình Marci thấy được. Giả sử thứ tự đó là $\displaystyle m( 1) ,m( 2) ,...,m( n)$ hay hoán vị $\displaystyle m$ và mục tiêu của ta là xác định được hoán vị này. Ở mỗi bước, ta sẽ đưa cho Marci một danh sách $\displaystyle n$ số nguyên dương theo thứ tự của ta, lần lượt là $\displaystyle a( 1) ,a( 2) ,...,a( n)$. Marci sau đó vẽ một đồ thị có hướng gồm $\displaystyle n$ đỉnh, đánh số từ $\displaystyle 1$ tới $\displaystyle n$ và Marci sau đó vẽ một cạnh có hướng đi từ $\displaystyle i$ tới $\displaystyle m( a( i))$ với mỗi $\displaystyle 1\leqslant i\leqslant n$. Cuối cùng, đồ thị này sẽ được phân hoạch thành các chu trình rời nhau và Marci sẽ cho ta biết số lượng các chu trình này. 
+
+a/ Chứng minh rằng hoán vị bí mật của Marci có thể được xác định trong tối đa $\displaystyle n\log_{2}( n)$ bước
+
+b/ Liệu có tồn tại một hằng số $\displaystyle c< 1$ sao cho với mỗi số nguyên dương $\displaystyle n$, ta có thể xác định được hoán vị bí mật trong không quá $\displaystyle cn\log_{2}( n)$ bước. 
