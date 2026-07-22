@@ -2,7 +2,7 @@ baseURL = 'https://ken3k06.github.io/'
 locale = 'en-us'
 title = 'dvcks blog'
 theme = "risotto"
-
+enableRobotsTXT = true
 
 sectionPagesMenu = "main"
 
