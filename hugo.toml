@@ -3,7 +3,7 @@ locale = 'en-us'
 title = 'dvcks blog'
 theme = "risotto"
 enableRobotsTXT = true
-
+pluralizeListTitles = false
 sectionPagesMenu = "main"
 
 

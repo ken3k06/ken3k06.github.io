@@ -3,7 +3,6 @@ date = '2026-07-20'
 title = 'Một số bài toán về hoán vị'
 toc = true
 math = true 
-tags = ["math"]
 +++
 
 
