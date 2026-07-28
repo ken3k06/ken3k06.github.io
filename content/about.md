@@ -12,5 +12,5 @@ Mình hiện tại đang là sinh viên năm 2, Trường Đại học Công ngh
 
 Cấp 3 học chuyên toán tại Trường THPT Chuyên Lê Quý Đôn, Đà Nẵng, khóa K37. 
 
-
+Blog này để mình ghi lại một số thứ học được về mật mã học và các chủ đề khác liên quan (tổ hợp, số học, v.v...). 
 
