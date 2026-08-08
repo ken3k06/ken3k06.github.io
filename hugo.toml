@@ -17,7 +17,7 @@ weight = 10
 
 
 [params.theme]
-palette = "tokyo-night-light"
+palette = "tokyo-night-dark"
 
 
 [params.about]
