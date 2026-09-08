@@ -17,8 +17,10 @@ weight = 10
 
 
 [params.theme]
-palette = "tokyo-night-dark"
+palette = "base16-light"
 
+[params]
+  customCSS = ["css/custom.css"]
 
 [params.about]
 title = "dvck13"
