@@ -1,6 +1,6 @@
 +++
 date = '2026-09-08T15:55:04+07:00'
-title = 'Some notes on game theory - Part 1'
+title = 'Game theory and Cryptography - Part 1'
 toc = true
 math = true 
 +++
@@ -15,8 +15,10 @@ th, td {
     padding: 8px;
 }
 </style>
+Trong series dài tập lần này, mình muốn chia sẻ một số thứ mình học được trong quá trình nghiên cứu về ứng dụng của Lý thuyết trò chơi trong mật mã học. Bắt đầu bằng một số khái niệm cơ bản trong Lý thuyết trò chơi
 
-Tham khảo và viết lại từ cuốn Lý thuyết trò chơi của thầy Tạ Quang Sơn
+
+Bài viết dưới đây được tham khảo và viết lại từ cuốn Lý thuyết trò chơi của thầy Tạ Quang Sơn
 
 ## Ra quyết định
 Lý thuyết trò chơi liên quan rất nhiều tới việc ra quyết định. Vì vậy ta hãy cùng xem qua một số ví dụ sau đây để hiểu rõ về việc ra quyết định.

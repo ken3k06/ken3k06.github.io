@@ -17,7 +17,7 @@ weight = 10
 
 
 [params.theme]
-palette = "base16-light"
+palette = "tender"
 
 [params]
   customCSS = ["css/custom.css"]

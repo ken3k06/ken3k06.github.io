@@ -1,0 +1,554 @@
++++
+date = '2026-07-30'
+title = 'DLP and its hardness'
+toc = true
+math = true 
++++
+## Introduction 
+
+The discrete logarithm problem is a mathematical problem that arises in many cryptographic settings. The first published public key construction, due to Diffie and Hellman, is based on the discrete logarithm problem in a finite field $\mathbb{F}_p$. 
+
+Let $p$ be a (large) prime and $g$ be a primitive element of $\mathbb{F}_p^*$. A primitive element is a generator of the multiplicative group $\mathbb{F}_p^*$, this mean that every nonzero element of $\mathbb{F}_p$ can be written as a power of $g$. Hence, the list of elements of $\mathbb{F}_p^*$ is given by the set $\lbrace 1, g^1, g^2, \ldots, g^{p-2} \rbrace$.
+
+**Definition.** Let $g$ be a primitive root for $\mathbb{F}_p$ and let $h$ be a nonzero element of $\mathbb{F}_p$. The discrete logarithm problem (DLP) is the problem of finding an exponent $x$ such that 
+
+<center>
+$\displaystyle g^x \equiv h \bmod p$
+</center>
+
+The number $x$ is caleld the discrete logaritm of $h$ to the base $g$ and is denoted by $\log_g(h)$.
+
+Note that if a solution $x$ exists, then there are many of them, and each solution is differing by some multiple of $p-1$: 
+
+<center>
+$g^{x+k(p-1)} \equiv g^x \times (g^{(p-1)})^k \equiv g^x \equiv h \bmod p$
+</center>
+
+## Group Theory 
+
+In general, the DLP can be defined in any finite cyclic group $G$. First, let's recall some definitions from group theory. 
+
+**Definition 1.** A group consists of a set $G$ and a rule, which we denote by $\cdot$, for combiniing two elements $a,b \in G$ to obtain an element $a \cdot b \in G$. The composition operation $\cdot$ must satisfy the following properties:
+
+1. **Identity Law** : There exists an element $e \in G$ such that for all $a \in G$, $e \cdot a = a \cdot e = a$.
+
+2. **Inverse Law** : For each $a \in G$, there exists an element $a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$.
+
+3. **Associative Law** : For all $a,b,c \in G$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+
+4. **Commutative Law** : For all $a,b \in G$, $a \cdot b = b \cdot a$. (This property is only required for abelian groups.)
+
+
+If $\|G\|$ is finite, then $G$ is a finite group, and the number of elements in $G$ is called the order of the group. 
+
+**Definition 2.** Let $G$ be a finite group and let $a \in G$ be an element of the group. Suppose that there exists a positive integer $d$ with the property that $a^d=e$. The smallest such $d$ is called the order of $a$. If there is no such $d$, then $a$ is said to have infinite order. 
+
+**Definition 3.** Let $G$ be a finite group. Then every element of $G$ has finite order. Further, if $a \in G$ has order $d$ and if $a^k=e$ then $d\mid k$. 
+
+And lastly we have Lagrange's theorem:
+
+
+**Theorem (Lagrange's Theorem).** Let $G$ be a finite group, and let $H$ be a subgroup of $G$. Then the order of $H$ divides the order of $G$.
+
+
+The difficulty of the DLP depends on the group. There are easy group like $(\mathbb{Z}/n\mathbb{Z}, +)$ for which it can be solved in polynomial time, moderately hard groups (finite field of prime order, class group of number fields) and hard groups (elliptic curves or the Jacobian of genus 2 curves) for which one only knows exponential algorithms.
+
+However, we have the following results:
+
+**Theorem.** (Shoup) Let $A$ be a probabilistic generic algorithm for solving the DLP. If $A$ succeeds with probability at least $1/2$ on a group $G$, then $A$ must perform at least $\Omega(\sqrt{\mid G\mid})$ group operations in $G$. 
+
+Next, we will analyze some basic algorithms to solve the DLP. 
+
+## Basic attacks
+
+
+
+### Exhaustive Search 
+The simplest method for computing the discrete logarithm $x$ from $g^x=y$ in $G$ is to test whether $x=0,1,2,...$ until we find one that satisfy the equation. This method is clearly inefficient for large groups since it requires $O(\|G\|)$ group operations in the worst case.
+
+```python
+from Crypto.Util.number import getPrime
+from sage.all import * 
+from sage.misc.prandom import randrange
+p = getPrime(16)
+F = GF(p)
+g = F.multiplicative_generator()
+x = randrange(1, p) 
+y = g**x 
+print("p =", p)
+print("g =", g)
+print("y =", y) 
+print("x =", x) 
+def brute_dlp(g,y,p): 
+    for i in range(p):
+        if g**i == y:
+            return i
+    return None
+x_ = brute_dlp(g,y,p)
+print("Brute-force DLP solution x_ =", x_)
+print(x==x_)
+'''
+p = 48341
+g = 3
+y = 35728
+x = 785
+Brute-force DLP solution x_ = 785
+True
+'''
+```
+### Shanks Baby-Step Giant-Step
+
+Let $G$ be a group and let $g \in G$ be an element of order $n \geq 2$. The following algorithm solves the discrete logarithm problem $g^x =h$ in $\Omega(\sqrt{n}\cdot \log{n})$ steps using $\Omega(\sqrt{n})$ space.
+
+(1) Let $m = 1 + \lfloor \sqrt{n} \rfloor$.
+
+(2) Next, we create two list and find their collision. 
+
+- Baby-step: $\displaystyle e,g,g^{2} ,...,g^{m}$
+- Giant-step: $\displaystyle h,h\cdotp u,...,h\cdot u^{m}$ where $\displaystyle u=g^{-m}$
+
+(3) If there is a match between them, say $\displaystyle g^{i} =h\cdot u^{j} =g^{x} \cdot g^{-jm}$ then we have $\displaystyle x=i+jm$ is a solution to our problem. 
+
+```python
+def floor_div(a,b):
+    return a//b 
+def ceil_div(a,b): 
+    return floor_div(a,b) + (a%b > 0)
+def bsgs_dlp(g,y,p):
+    n = g.multiplicative_order()
+    m = ceil_div(isqrt(n),1) + 1 
+    table = {}
+    baby_step = 1
+    for i in range(m):
+        table[baby_step] = i 
+        baby_step = (baby_step * g) % p 
+
+    lamb = pow(g, n - m, p) 
+    giant_step = y 
+    for j in range(m):
+        if giant_step in table:
+            return j*m + table[giant_step]
+        giant_step = (giant_step * lamb) % p
+    return None 
+
+x__ = bsgs_dlp(g,y,p)
+print("BSGS DLP solution x__ =", x__)
+```
+
+### The Pollard-Rho Algorithm 
+This algorithm has the same running time as the previous one but it only requires constant storage. 
+
+First, we need a partition $\displaystyle G_{1} \cup G_{2} \cup G_{3} =G$. Let $f : G \rightarrow G$ be defined by: 
+
+<center>
+$\displaystyle f( \beta ) =\begin{cases}
+g\beta  & ,\beta \in G_{1}\\
+\beta ^{2} & ,\beta \in G_{2}\\
+h\beta  & ,\beta \in G_{3}
+\end{cases}$
+</center>
+
+We choose a random $x_0 \in \lbrace 1,...,n \rbrace$ and compute $\beta_{0} = g^{x_0}$. Then we compute the sequence: 
+<center>
+$\displaystyle \beta_{i+1} = f(\beta_i)$
+</center>
+
+The elements of this sequence can be written as: 
+
+<center>
+$\displaystyle \beta_{i} = g^{x_{i}} h^{\delta_{i}}$
+</center>
+
+where $\displaystyle \delta_{0} =0$ and 
+
+<center>
+$\displaystyle x_{i+1} =\begin{cases}
+x_{i} +1\bmod n & ,\beta _{i} \in G_{1}\\
+2x_{i}\bmod n & ,\beta_{i} \in G_{2}\\
+x_{i} & ,\beta _{i} \in G_{3}
+\end{cases}$
+</center>
+
+and 
+<center>
+$\displaystyle \delta_{i+1} =\begin{cases}
+\delta _{i}\bmod n & ,\beta_{i} \in G_{1}\\
+2\delta _{i}\bmod n & ,\beta _{i} \in G_{2}\\
+\delta _{i} +1 & ,\beta _{i} \in G_{3}
+\end{cases}$
+</center>
+
+At some points, two elements in the sequence $(\beta_i)$ must be equal, say $\beta_{i+k}=\beta_{i}$. This implies 
+
+<center>
+$\displaystyle g^{x_i} h^{\delta_i} = g^{x_{i+k}} h^{\delta_{i+k}}$
+</center>
+
+and therefore 
+
+<center>
+$\displaystyle g^{x_i - x_{i+k}} = h^{\delta_{i+k} - \delta_i}$
+</center>
+We obtain a congruence:
+<center>
+$x_i-x_{i+k} \equiv x (\delta_{i+k} - \delta_i) \bmod n$
+</center>
+The solution is unique if $\delta_{i+k}-\delta_i$ is invertible modulo $n$. In case the solution is not unique, then we can testing the different possibilities modulo $n$. If there are too many possibilities then the algorithm is applied with different modulo $x_0$. 
+
+By the birthday paradox, we expect to find a collision after about $\sqrt{\pi n/2}$ steps. 
+
+Two problems need to be solved to use the rho method successfully:
+
+1. Design step function so that it "randomly" samples element (so that the birthday paradox applies) while being deterministic (so we can use [Floyd's cycle finding method](https://cp-algorithms.com/others/tortoise_and_hare.html) to remove storage)
+
+2. Design step function so that collision gives meaningful result.
+
+
+
+```python
+def lin_congruence(a,b,m): 
+    '''
+    return x satisfy the modular equation ax = b modulo m
+    '''
+    a = a % m 
+    b = b % m 
+    u = 0 
+    v = 0 
+    d, u, v = xgcd(a,m) 
+    if b % d != 0:
+        return None 
+    x0 = (u*(b//d)) % m
+    if (x0 < 0):
+        x0 += m 
+    sol = [(x0+i*(m//d)) for i in range(d)]
+    return sol 
+
+def pollard_rho_dlp(g,y,p):
+    n = g.multiplicative_order()
+    def step(beta, x, d): 
+        r = int(beta) % 3 
+        if r == 0:
+            beta = (beta * g) % p 
+            x = (x+1) % n
+        elif r == 1:
+            beta = (beta * beta) % p 
+            x = (2 * x) % n 
+            d = (2 * d) % n 
+        else: 
+            beta = (beta * y) % p 
+            d = (d + 1)% n 
+        return beta, x , d
+    while True:
+        x0 = randrange(1,n)
+        d = 0 
+        beta = pow(g, x0,p)
+        slow = (beta, x0, d)
+        fast = step(*slow)
+        fast = step(*fast)
+        while slow[0] != fast[0]: 
+            slow = step(*slow)
+            fast = step(*fast)
+            fast = step(*fast)
+        a = (fast[2] - slow[2]) % n
+        b = (slow[1] - fast[1]) % n
+        if a == 0:
+            continue 
+        sol = lin_congruence(a,b,n)
+        if sol is not None:
+            for s in sol:
+                if pow(g,s,p) == y:
+                    return s
+
+x_rho = pollard_rho_dlp(g,y,p)
+print("Pollard's Rho DLP solution x_rho =", x_rho)
+```
+
+Watch more: 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QjDC1YtQFj4?si=pqnvVqAM4AWD1AZ2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### The Pohlig-Hellman algorithm
+
+The idea of the Pohlig-Hellman algorithm is to find the discrete logarithm $x$ modulo each divisors of the group's order. Then, thanks to the Chinese Remainder Theorem (CRT), we can recover $x$ modulo the group's order. 
+
+1. Determine the prime factorization of the order of the group: 
+
+<center>
+$\displaystyle n = \phi(p) = \prod_{i=1}^{r} p_i^{k_i}$
+</center>
+
+2. Determine the value of $x$ modulo $p_i^{k_i}$ for each $i$. 
+
+3. Recompute $x$ modulo $n$ using the CRT. 
+
+
+Given $y = g^x$, by computing $y^{(n/p_i^{k_i})}$ and $g^{(n/p_i^{k_i})}$, we can reduce the problem to finding $x$ modulo $p_i^{k_i}$.This works because of the following observation: 
+
+<center>
+$\displaystyle y^{n/\left( p_{i}^{k_{i}}\right)} =\left( g^{x}\right)^{n/\left( p{_{i}}^{k_{i}}\right)} =g^{\left( x_{1} +p_{i}^{k_{i}} x_{2}\right) n/\left( p_{i}^{k_{i}}\right)}$
+</center>
+
+<center>
+$\displaystyle =g^{\left( x_{1} n/\left( p_{i}^{k_{i}}\right)\right)} g^{nx_{2}} =\left( g^{n/\left( p_{i}^{k_{i}}\right)}\right)^{x_{1}}$ 
+</center>
+
+Here, $\displaystyle g^{n/\left( p_{i}^{k_{i}}\right)}$ is the generator of the subgroup of order $\displaystyle p_{i}^{k_{i}}$ and $\displaystyle x\equiv x_{1} +p_{i}^{k_{i}} x_{2} \equiv x_{1}\bmod p_{i}^{k_{i}}$
+
+Next, we need to find a way to solve the DLP in a group of order $\displaystyle p_{i}^{k_{i}}$, for two specific cases: when $p=2$ and when $p>2$. 
+
+
+**Cases 1:** $p = 2$
+
+For a cyclic group $G$ of order $2^k$, we can interpret $x$ as a $k$ bit number, i.e $x = c_02^0 +c_12^1+...+c_k2^k$ where the coefficients $c_0,c_1,...,c_k \in \lbrace 0,1 \rbrace$. We can find the coefficients one by one. First, we find $c_0$ by raising $g^x$ to the power $2^{k-1}$ modulo $p$. 
+
+If $c_0=0$ then $x$ is even and $x=2y$. And so by Euler's totient theorem we have: 
+
+<center>
+$\displaystyle (g^{2y})^{2^{k-1}} \equiv g^{y2^k} \equiv 1 \bmod p$
+</center>
+
+Else, if $c_0=1$ then raising $g^x$ to the power $2^{k-1} \bmod p$ will return the result $p-1$. 
+
+Now we can also find out what the value of $c_1$ is, by using the same approach: raise $g^{x-c_0x^0}$ to the power $2^{k-2} \bmod p$. If the result is $1$ then $c_1=0$ else $c_1=1$. Repeat the procedure for all coefficients $c_i$ until we find all of them.
+
+```python
+from sage.all import * 
+from sage.misc.prandom import randrange
+p = 257
+F = GF(p)
+g = F.multiplicative_generator()
+print(g.multiplicative_order())
+x = randrange(1, p)
+h = g**x 
+def dlp_2adic(g,h,p):
+    '''
+    solve the dlp on the group of order 2^k
+    '''
+    n = g.multiplicative_order()
+    k = n.valuation(2)
+    x = ""
+    for i in range(1,k+1):
+        val = pow(h, n//(2**i),p)
+        if val == 1:
+            x += "0"
+            # c0 =0 
+            h = h 
+        else:
+            x += "1"
+            # c0 = 1 
+            # precompute h for next step
+            mul = pow(g, 2**(i-1), p) 
+            h = h * pow(mul, p-2, p) % p 
+    return Integer(x[::-1],2)
+x_ = dlp_2adic(g,h,p)
+print("2-adic DLP solution x_ =", x_)
+print(x == x_)
+```
+
+**Cases 2:** $p > 2$
+
+The idea is similiar to the previous case. For a cyclic group $G$ of order $p^k$, we can interpret $x$ as a base $p$ number, i.e $x = c_0p^0 +c_1p^1+...+c_kp^k$ where the coefficients $c_0,c_1,...,c_k \in \lbrace 0,1,...,p-1 \rbrace$. We can find the coefficients one by one. First, we find $c_0$ by raising $g^x$ to the power $p^{k-1}$ modulo $p$. Let $q-1=p^k$, we have: 
+
+<center>
+$\displaystyle g^{\left( c_{0} +c_{1} p^{1} +...+c_{k} p^{k}\right)\frac{q-1}{p}} =g^{( c_{0} +Kp)^{\frac{q-1}{p}}} =g^{c_{0}\frac{q-1}{p}} g^{K( q-1)} =\left( g^{\frac{q-1}{p}}\right)^{c_{0}}$
+</center>
+
+This group's order is $\displaystyle p$ which is small. Hence we can solve the DLP in this subgroup and find $\displaystyle c_{0}$. 
+
+Next, we can also find out what the value of $c_1$ is, by using the same approach: raise $g^{x-c_0x^0}$ to the power $p^{k-2} \bmod p$. Repeat the procedure for all coefficients $c_i$ until we find all of them.
+
+```python
+def dlp_padic(g,h, p, q): 
+    '''
+    solve the dlp on the group of order p^k
+    '''
+    n = g.multiplicative_order()
+    k = n.valuation(q)
+    assert p - 1 == q**k 
+    x = 0 
+    b_j = h 
+    alpha = pow(g, n//q, p)
+    for j in range(k):
+        h_i = pow(b_j, n//(q**(j+1)), p)
+        a_j = bsgs_dlp(alpha, h_i, p)
+        assert a_j >=0 and a_j < q 
+        x += a_j * (q**j)
+        mul = pow(g, a_j * (q**j), p)
+        assert gcd(mul, p)==1
+        b_j = (b_j * pow(mul, p-2, p)) % p
+    return x 
+```
+
+And finally we have the complete Pohlig-Hellman algorithm: 
+
+```python
+def pohlig_hellman(g,h,p):
+    '''
+    solve the dlp on the group of order n
+    where n = p1^k1 * p2^k2 * ... * pt^kt
+    '''
+    n = g.multiplicative_order()
+    factorization = n.factor()
+    x_list = []
+    mod_list = []
+    for (q, e) in factorization:
+            g_sub = pow(g, n // (q**e), p)
+            h_sub = pow(h, n // (q**e), p)
+            
+            if q == 2:
+                xi = dlp_2adic(g_sub, h_sub, p)
+            else:
+                xi = dlp_padic(g_sub, h_sub, p, q)
+                
+            x_list.append(xi)
+            mod_list.append(q**e)
+            
+    return crt(x_list, mod_list)
+```
+
+My full code if anyone interested: [here](https://github.com/Nhan-Laptop/WCO4/blob/main/5_Diffie_Hellman/dlp.py)
+
+<!-- Another approach is from this post [here](https://math.stackexchange.com/questions/1863037/discrete-logarithm-modulo-powers-of-a-small-prime) -->
+
+
+
+
+
+
+
+
+**Example:**
+
+```python
+#!/usr/bin/python
+
+from binascii import hexlify
+from gmpy2 import *
+import math
+import os
+import sys
+
+if sys.version_info < (3, 9):
+    math.gcd = gcd
+    math.lcm = lcm
+
+_DEBUG = False
+
+FLAG  = open('flag.txt').read().strip()
+FLAG  = mpz(hexlify(FLAG.encode()), 16)
+SEED  = mpz(hexlify(os.urandom(32)).decode(), 16)
+STATE = random_state(SEED)
+
+def get_prime(state, bits):
+    return next_prime(mpz_urandomb(state, bits) | (1 << (bits - 1)))
+
+def get_smooth_prime(state, bits, smoothness=16):
+    p = mpz(2)
+    p_factors = [p]
+    while p.bit_length() < bits - 2 * smoothness:
+        factor = get_prime(state, smoothness)
+        p_factors.append(factor)
+        p *= factor
+
+    bitcnt = (bits - p.bit_length()) // 2
+
+    while True:
+        prime1 = get_prime(state, bitcnt)
+        prime2 = get_prime(state, bitcnt)
+        tmpp = p * prime1 * prime2
+        if tmpp.bit_length() < bits:
+            bitcnt += 1
+            continue
+        if tmpp.bit_length() > bits:
+            bitcnt -= 1
+            continue
+        if is_prime(tmpp + 1):
+            p_factors.append(prime1)
+            p_factors.append(prime2)
+            p = tmpp + 1
+            break
+
+    p_factors.sort()
+
+    return (p, p_factors)
+
+while True:
+    p, p_factors = get_smooth_prime(STATE, 1024, 16)
+    if len(p_factors) != len(set(p_factors)):
+        continue
+    # Smoothness should be different or some might encounter issues.
+    q, q_factors = get_smooth_prime(STATE, 1024, 17)
+    if len(q_factors) == len(set(q_factors)):
+        factors = p_factors + q_factors
+        break
+
+if _DEBUG:
+    import sys
+    sys.stderr.write(f'p = {p.digits(16)}\n\n')
+    sys.stderr.write(f'p_factors = [\n')
+    for factor in p_factors:
+        sys.stderr.write(f'    {factor.digits(16)},\n')
+    sys.stderr.write(f']\n\n')
+
+    sys.stderr.write(f'q = {q.digits(16)}\n\n')
+    sys.stderr.write(f'q_factors = [\n')
+    for factor in q_factors:
+        sys.stderr.write(f'    {factor.digits(16)},\n')
+    sys.stderr.write(f']\n\n')
+
+n = p * q
+c = pow(3, FLAG, n)
+
+print(f'n = {n.digits(16)}')
+print(f'c = {c.digits(16)}')
+```
+
+For this challenge, we can factor $n$, and since $p-1$ and $q-1$ are smooth numbers, we can use the Pohlig-Hellman algorithm to solve the DLP and recover the flag.
+
+```python
+n = "575ccba5eb432070f54b12237b91996ff33d9e8fd7c8766da0833a89fd1d95abda573a9e6973c7769f60de749cd044a5d50c62f929680eeb44c0b93b014c1bfdbf668f581a2bfa034c09b2f6b755f8ffe883b5b4e756621b983967e64d728f09f1e8485672b896550928bcab85e72569d140e8e2ddf79dde58a6f6bbcae9c4ae6e8b93e4dc882e0da5ab78a07a92b4257564b34a64b7b19d91f1dac8e695f9b988c49063d72a891762c08683bdee592ff7ce8bd5906a671ea8ea5a54c65211a7182f628e5aa87ad3d388be3fae703ed8c43df264c33dd4c8d6faf3d8571b5c220c05f14093a72b93fe0d93d73b1440fdad30e310daa87e566219b82217d0895d"
+c = "307652ee5a77dab4e70ded15e2c791c268e2c2e389d1f02887ea5baf8cf2b4aab98b4c9c47556a3c4b98c668a90d856c548c574dfa9e252fb92c1886d0fb54ef2492de80879ed5c655ed7e3edebb748599ce2f5d6efaf3843818571d96c92a072f8d7d246c7f440001b5b9e75d6736bb96549e35b45f8e2ba7c133d9238b997c0a6c88a8748e086432017566a372b3defe3c070d0f68694eb3e3c1dd4d12942769d619ec214b6ec1a2d269b81363f5f4866ea8558bb10b22659069001083f45445031a9612df9cf9ee8cc905529e98b4d8c079fd1876d3f03b49c16f2105d3ca5fd9e0b14e777a678d6951aa9c92a35313ce444320e57b17e034ee6278926345"
+
+n = Integer(n,16)
+c = Integer(c,16)
+print(n)
+
+p = 99780657006850307217163612271973390190663607819917363361274107729126350596004575425605962244848758942414685363499768407969467515520576830928375995814136925441205578035494602110292472739632571208253734744415405389058270558553966428927961144743641000259884783893427233387123259437508145503920189935184380947127
+q = 110527350987883845703818360205139695189371692715336120000550661421700243956585990933562072789588327968698648424408232508707836774937738833785305269946638572818303754817202929468530110527537160908746219153021943572111734050046799583587771499425306849674104694050784670115941207695741101581323717208164212189323
+assert p * q == n 
+cp = c % p
+cq = c % q
+g=3
+Fp = GF(p)
+Fq = GF(q)
+print(factor(p-1))
+xp = pohlig_hellman(
+    g = Fp(g),
+    h = Fp(cp),
+    p = p,
+    facs = factor(p-1)
+)
+xq = pohlig_hellman(
+    g = Fq(g),
+    h = Fq(cq),
+    p = q,
+    facs = factor(q-1)
+)
+FLAG = crt(
+    [xp, xq],
+    [p-1, q-1]
+)
+flag_hex = hex(FLAG)[2:]
+if len(flag_hex) % 2:
+    flag_hex = "0" + flag_hex
+print(bytes.fromhex(flag_hex))
+```
+
+## Sagemath and other tools
+
+For solving DLP, we can use Sagemath or other tools like CADO-NFS. 
+
+
+Install it here: https://github.com/cado-nfs/cado-nfs or from GitLab https://gitlab.inria.fr/cado-nfs/cado-nfs
+
+
+Read the Sagemath's doc here: https://doc.sagemath.org/html/en/reference/groups/sage/groups/generic.html
