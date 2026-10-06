@@ -1,5 +1,5 @@
 +++
-date = '2026-09-08T15:55:04+07:00'
+date = '2026-09-11'
 title = 'Game theory and Cryptography - Part 2'
 toc = true
 math = true 

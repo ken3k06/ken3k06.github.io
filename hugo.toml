@@ -37,6 +37,10 @@ icon = "fa-solid fa-envelope"
 title = "Email"
 url = "mailto:letriduc.dn@gmail.com"
 
+
+
+
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
